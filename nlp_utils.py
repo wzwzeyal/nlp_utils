@@ -2,24 +2,12 @@
 import re
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import nltk
-nltk.download('punkt')
-
-# stop_words = []
-# with open('./drive/MyDrive/Datasets/hebrew_stop_words.json', 'r', encoding="utf8") as f:
-#     stop_words = json.load(f)
 
 
-def get_all_data(data_type):
-    return pd.read_csv(f'../data/external/Sentiment_Data/morph/{data_type}.tsv', sep='\t')
-    # .head(100)
-
-
-def get_data(data_type, max_nof_rows):
-    return get_all_data(data_type).head(max_nof_rows)
-    # .head(100)
-
+def get_data(path_prefix, is_morph, data_type):
+    data_text = 'morph' if is_morph else 'token'
+    return pd.read_csv(f'{path_prefix}/{data_text}/{data_type}.tsv', sep='\t')
+ 
 
 def keep_only_heb(p_text):
     chars_pattern = re.compile(r"""[^אבגדהוזחטיכלמנסעפצקרשתןףץםך'\- "]""")
