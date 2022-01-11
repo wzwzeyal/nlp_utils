@@ -31,8 +31,9 @@ def consolidate_k_chars(text, k):
     return text
 
 
-def clean_data(df, dirty_column, clean_column, stop_words):
+def clean_data(df, dirty_column, clean_column, remove_stop_words=False, stop_words=None):
     df[clean_column] = df[dirty_column].map(lambda x: keep_only_heb(x))
     df[clean_column] = df[clean_column].map(lambda x: remove_k_length(x))
-    df[clean_column] = df[clean_column].map(lambda x: remove_words(x, stop_words))
     df[clean_column] = df[clean_column].map(lambda x: consolidate_k_chars(x, 3))
+    if (remove_stop_words):
+        df[clean_column] = df[clean_column].map(lambda x: remove_words(x, stop_words))
