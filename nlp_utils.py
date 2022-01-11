@@ -4,11 +4,6 @@ import numpy as np
 import pandas as pd
 
 
-def get_data(path_prefix, is_morph, data_type):
-    data_text = 'morph' if is_morph else 'token'
-    return pd.read_csv(f'{path_prefix}/{data_text}/{data_type}.tsv', sep='\t')
- 
-
 def keep_only_heb(p_text):
     chars_pattern = re.compile(r"""[^אבגדהוזחטיכלמנסעפצקרשתןףץםך'\- "]""")
     return chars_pattern.sub('', p_text)
